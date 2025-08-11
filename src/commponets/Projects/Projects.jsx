@@ -156,7 +156,7 @@ const Projects = () => {
     "Chart.js",
   ],
   liveLink: "https://dashing-lebkuchen-9673c3.netlify.app/",
-  githubLink: "",
+  githubLink: "https://github.com/dipu-barman/law-bd-website",
   challenges: [
     "Implementing a dynamic lawyer pricing chart using Chart.js",
     "Developing secure booking and cancellation functionality",
