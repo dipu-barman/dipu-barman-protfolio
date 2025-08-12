@@ -18,7 +18,9 @@ import { useInView } from "react-intersection-observer";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { Fade } from "react-awesome-reveal";
-import emailjs from "emailjs-com";
+import emailjs from '@emailjs/browser'
+import { useRef } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const MySwal = withReactContent(Swal);
 
@@ -27,6 +29,8 @@ const ContactUs = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+   const form = useRef();
 
   const container = {
     hidden: { opacity: 0 },
@@ -84,16 +88,37 @@ const ContactUs = () => {
     emailjs
       .sendForm(
         "service_ihcbrp7",
-        "template_mfvbyhx",
-        e.target,
+        "template_9rs1rim",
+        form.current,
         "3uHa7_5ha6pcm1iFH"
       )
       .then(
         (result) => {
-          alert("Message sent successfully!");
+          console.log(result)
+          // alert("Message sent successfully!");
+             toast.success("✅ Your message has been sent successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         },
         (error) => {
-          alert("Failed to send message, try again.");
+          // alert("Failed to send message, try again.");
+            toast.error("❌ Something went wrong. Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         }
       );
   };
@@ -105,6 +130,7 @@ const ContactUs = () => {
         className="bg-black text-white py-20 px-4 sm:px-8 relative overflow-hidden"
       >
         <div className="container mx-auto max-w-6xl">
+           <ToastContainer  toastClassName="mt-20"/>
           <motion.div
             ref={ref}
             initial="hidden"
@@ -134,6 +160,7 @@ const ContactUs = () => {
 
               {/* Contact Form */}
               <motion.form
+              ref={form}
                 onSubmit={sendEmail}
                 variants={item}
                 className="space-y-4 mb-8"
@@ -143,6 +170,7 @@ const ContactUs = () => {
                     <input
                       type="text"
                       placeholder="Your Name"
+                      name="name"
                       className="w-full bg-gray-800 rounded-sm px-4 py-3 text-indigo-600 placeholder-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                       required
                     />
@@ -150,6 +178,7 @@ const ContactUs = () => {
                   <div>
                     <input
                       type="email"
+                      name="email"
                       placeholder="Your Email"
                       className="w-full bg-gray-800 rounded-sm px-4 py-3 text-indigo-600 placeholder-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                       required
@@ -159,6 +188,7 @@ const ContactUs = () => {
                 <div>
                   <textarea
                     placeholder="Your Message"
+                    name="message"
                     rows="5"
                     className="w-full bg-gray-800 rounded-sm px-4 py-3 text-indigo-600 placeholder-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                     required
@@ -168,6 +198,7 @@ const ContactUs = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
+                  value="Send"
                   className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 via-teal-500 to-indigo-600 text-white rounded-sm hover:from-teal-500 hover:to-indigo-600 transition-all duration-300 text-lg font-medium"
                 >
                   <FaPaperPlane />
