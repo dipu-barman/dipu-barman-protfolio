@@ -28,6 +28,7 @@ import projectthreeImgTwo from "../../assets/Screenshot 2025-08-12 012557.png";
 import projectthreeImgThree from "../../assets/Screenshot 2025-08-12 012655.png";
 // Screenshot 2025-08-12 002729.png ,,Screenshot 2025-08-12 002636.png
 import projectthreeImgFour from "../../assets/Screenshot 2025-08-12 012820.png";
+import { Link } from "react-router";
 // import projectTwoImgFive from "../../assets/Screenshot 2025-08-12 002816.png";
 const techColors = {
   "React.js": "bg-blue-500 text-white",
@@ -341,6 +342,8 @@ const Projects = () => {
                     <FiGithub className="mr-1" />
                     GitHub
                   </a>
+
+                   
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -351,6 +354,8 @@ const Projects = () => {
                     <FiEye className="mr-1" />
                     Details
                   </button>
+
+                  {/* <Link to='/deatiles'><button  className="flex-1 flex items-center justify-center py-2 bg-gray-900 hover:bg-gray-700 rounded-md transition-colors duration-300 text-sm">view more</button></Link> */}
                 </div>
               </div>
             </motion.div>

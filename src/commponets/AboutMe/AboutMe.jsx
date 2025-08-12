@@ -1,34 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { FaCode, FaPaintBrush, FaBook } from "react-icons/fa";
+import { FaCode, FaPaintBrush, FaGamepad, FaBookOpen, FaGlobe, FaPenNib, FaFilm } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const skillList = [
   { skill: "Clean Code", level: 90 },
-  { skill: "Problem Solving", level: 80 },
-  { skill: "UI/UX Design", level: 90 },
+  { skill: "Problem Solving", level: 85 },
+  { skill: "UI/UX Design", level: 85 },
   { skill: "Continuous Learning", level: 100 },
-];
-
-const aboutItems = [
-  {
-    icon: <FaCode className="text-indigo-600 text-4xl mt-1 flex-shrink-0" />,
-    title: "My Coding Journey",
-    content:
-      "My programming adventure began at college when I built my first website using a WordPress theme. Since then, I've fallen in love with the problem-solving aspect of development. Currently specializing in the MERN stack, I enjoy creating full-stack applications that solve real-world problems. What excites me most is learning new technologies and pushing the boundaries of what I can build.",
-  },
-  {
-    icon: <FaPaintBrush className="text-indigo-600 text-4xl mt-1 flex-shrink-0" />,
-    title: "Creative Problem Solver",
-    content:
-      "I thrive on projects that require both technical skills and creative thinking. Whether it's designing intuitive user interfaces or architecting efficient backend systems, I approach each challenge with enthusiasm. My happy place? That moment when all the components come together to create something greater than the sum of its parts.",
-  },
-  {
-    icon: <FaBook className="text-indigo-600 text-4xl mt-1 flex-shrink-0" />,
-    title: "Beyond the Keyboard",
-    content:
-      "When I'm not coding, you'll find me watching movies or experimenting with games like Valorant, Free Fire, and PUBG. Diverse interests fuel creativity. I'm passionate about tech education and mentoring aspiring developers in my community.",
-  },
+  { skill: "Full-Stack MERN", level: 95 },
 ];
 
 const containerVariants = {
@@ -56,21 +36,13 @@ const skillBarVariants = {
   }),
 };
 
-const shimmerTextVariants = {
-  initial: { backgroundPosition: "-200% 0%" },
-  animate: {
-    backgroundPosition: ["-200% 0%", "200% 0%"],
-    transition: { duration: 3, repeat: Infinity, ease: "linear" },
-  },
-};
-
 const AboutMe = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
   // Typewriter text animation state
   const [typed, setTyped] = useState("");
-  const fullText = "Passionate Full-Stack Developer";
+  const fullText = "Passionate MERN Stack Developer";
 
   useEffect(() => {
     if (inView) controls.start("show");
@@ -96,9 +68,9 @@ const AboutMe = () => {
         {/* Title with shimmering gradient */}
         <motion.h2
           ref={ref}
-          initial="initial"
-          animate="animate"
-          variants={shimmerTextVariants}
+          initial={{ backgroundPosition: "-200% 0%" }}
+          animate={{ backgroundPosition: ["-200% 0%", "200% 0%"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           className="text-5xl md:text-5xl font-extrabold mb-20 text-center bg-gradient-to-r from-indigo-600 via-teal-500 to-indigo-600 bg-clip-text text-transparent tracking-wide drop-shadow-md"
           style={{ backgroundSize: "200% 100%" }}
         >
@@ -106,40 +78,53 @@ const AboutMe = () => {
         </motion.h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left: Animated about sections */}
+          {/* Left: Introduction and personality */}
           <motion.div
             ref={ref}
             variants={containerVariants}
             initial="hidden"
             animate={controls}
-            className="space-y-12"
+            className="space-y-12 text-gray-300"
           >
-            {aboutItems.map(({ icon, title, content }, i) => (
-              <motion.div
-                key={i}
-                variants={itemVariants}
-                className="flex items-start gap-6 cursor-default group"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.3, color: "#14b8a6", rotate: 15 }} // teal-500 hex
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  {icon}
-                </motion.div>
-                <div>
-                  <h3 className="text-3xl font-semibold mb-3 bg-gradient-to-r from-indigo-600 via-teal-500 to-indigo-600 bg-clip-text text-transparent tracking-tight group-hover:underline underline-offset-4 decoration-teal-400 decoration-2 transition-all">
-                    {title}
-                  </h3>
-                  <p className="text-gray-400 leading-relaxed text-lg">{content}</p>
-                </div>
-              </motion.div>
-            ))}
+            <motion.div variants={itemVariants} className="flex items-start gap-6">
+              <FaCode className="text-indigo-600 text-5xl mt-1 flex-shrink-0" />
+              <div>
+                <h3 className="text-3xl font-semibold mb-3 text-white">
+                  My Programming Journey
+                </h3>
+                <p className="leading-relaxed text-lg">
+                  I am a passionate MERN Stack Developer. My programming journey began during college when I built my first website using WordPress. Since then, I have been fascinated by the endless possibilities coding offers. I enjoy creating scalable full-stack applications that solve real-world problems and pushing my skills every day through continuous learning.
+                </p>
+              </div>
+            </motion.div>
 
-            {/* Typewriter tagline with pulse */}
+            <motion.div variants={itemVariants} className="flex items-start gap-6">
+              <FaPaintBrush className="text-indigo-600 text-5xl mt-1 flex-shrink-0" />
+              <div>
+                <h3 className="text-3xl font-semibold mb-3 text-white">
+                  The Work I Enjoy
+                </h3>
+                <p className="leading-relaxed text-lg">
+                  I love projects that blend technical expertise with creativity. Designing intuitive user interfaces and crafting efficient backend systems excite me the most. Every challenge motivates me to innovate and deliver meaningful solutions.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="flex items-start gap-6">
+              <FaGlobe className="text-indigo-600 text-4xl mt-1 flex-shrink-0" />
+              <div>
+                <h3 className="text-3xl font-semibold mb-3 text-white">My Hobbies</h3>
+                <p className="leading-relaxed text-lg">
+                  Outside programming, I love traveling to new places, blogging about my experiences, reading books that expand my horizons, and watching movies to unwind and find inspiration. When I’m not coding, I enjoy gaming (Valorant, PUBG, Free Fire) and digital painting. These interests fuel my
+                  creativity and keep me balanced. I also enjoy mentoring new
+                  developers and sharing knowledge.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Typewriter tagline */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={controls}
-              transition={{ delay: aboutItems.length * 0.3 + 0.4, duration: 0.8 }}
+              variants={itemVariants}
               className="text-center mt-12"
             >
               <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold bg-gradient-to-r from-indigo-600 via-teal-500 to-indigo-600 bg-clip-text text-transparent inline-block">
@@ -158,7 +143,7 @@ const AboutMe = () => {
             className="bg-gray-900 p-12 rounded-2xl shadow-xl"
           >
             <h3 className="text-4xl font-bold mb-10 text-center bg-gradient-to-r from-indigo-600 via-teal-500 to-indigo-600 bg-clip-text text-transparent tracking-wide">
-              My Approach
+              My Skills & Approach
             </h3>
             <ul className="space-y-8">
               {skillList.map(({ skill, level }, i) => (
@@ -197,35 +182,6 @@ const AboutMe = () => {
           About
         </h1>
       </motion.div>
-
-      {/* Additional styles */}
-      <style jsx>{`
-        .text-gradient-pulse {
-          background: linear-gradient(
-            270deg,
-            #2563eb,
-            #14b8a6,
-            #2563eb,
-            #14b8a6,
-            #2563eb
-          );
-          background-size: 600% 600%;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: pulseGradient 6s ease infinite;
-        }
-        @keyframes pulseGradient {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-      `}</style>
     </section>
   );
 };

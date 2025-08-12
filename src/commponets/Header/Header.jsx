@@ -5,6 +5,7 @@ import {
   FaFileDownload,
   FaEye,
 } from "react-icons/fa";
+import { SiReact, SiJavascript, SiNodedotjs, SiMongodb } from "react-icons/si";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Fade } from "react-awesome-reveal";
@@ -12,20 +13,38 @@ import Photo from "../../assets/IMG_20240221_205146.jpg";
 import CV from "../../assets/Dipu Barman-cv-formate.pdf";
 import { useEffect, useState } from "react";
 
+const skillIcons = [
+  { Icon: SiReact, name: "React" },
+  { Icon: SiJavascript, name: "JavaScript" },
+  { Icon: SiNodedotjs, name: "Node.js" },
+  { Icon: SiMongodb, name: "MongoDB" },
+];
+
 const Header = () => {
   const container = {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.3 } },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.3 },
+    },
   };
 
   const item = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
 
   const imageVariants = {
     hidden: { opacity: 0, x: 20 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -33,7 +52,6 @@ const Header = () => {
   const [typedText, setTypedText] = useState("");
   const fullText = "MERN Stack Developer";
 
-  // Typewriter effect
   useEffect(() => {
     let index = 0;
     const typing = setInterval(() => {
@@ -44,7 +62,6 @@ const Header = () => {
     return () => clearInterval(typing);
   }, []);
 
-  // 3D tilt effect on mouse move
   useEffect(() => {
     const handleMouseMove = (e) => {
       const x = (window.innerWidth / 2 - e.clientX) / 40;
@@ -55,7 +72,6 @@ const Header = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Download CV handler
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = CV;
@@ -65,7 +81,6 @@ const Header = () => {
     document.body.removeChild(link);
   };
 
-  // Preview CV handler
   const previewCV = () => {
     window.open(
       "https://drive.google.com/file/d/1wlz-uoznogcxHdXDy4AUZh9QlS6RLHhx/view?usp=sharing",
@@ -79,54 +94,186 @@ const Header = () => {
         id="home"
         initial="hidden"
         animate={inView ? "show" : "hidden"}
-        className="relative flex flex-col md:flex-row items-center justify-center px-4 sm:px-8 py-16 md:py-24 overflow-hidden text-white "
+        className="relative flex flex-col md:flex-row items-center justify-center px-4 sm:px-8 py-16 md:py-24 overflow-hidden text-white"
       >
-        {/* Animated background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900">
-          <motion.div
-            animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(37,99,235,0.15),_transparent)]"
-          />
-          <motion.div
-            animate={{ opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 6, repeat: Infinity }}
-            className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(20,184,166,0.05),_transparent)]"
-          />
-        </div>
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
 
-        <div className="container max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-0 lg:gap-12 xl:gap-16 z-10">
-          {/* Text */}
+        <div className="container max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-12 z-10">
+          {/* TEXT SECTION */}
           <motion.div
             ref={ref}
             variants={container}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
             className="text-center md:text-left max-w-2xl order-2 md:order-1"
           >
             <motion.h1
               variants={item}
-              className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 tracking-wide text-gray-300"
-              style={{ color: "#E0E0E0" }} // soft warm gray
+              className="text-2xl sm:text-3xl font-semibold mb-4 text-gray-300"
             >
               Hello, I&apos;m
             </motion.h1>
 
-            {/* Animated Gradient Name */}
             <motion.h2
               variants={item}
-              className="text-2xl sm:text-5xl md:text-5xl font-extrabold mb-3 
-                         bg-gradient-to-r from-indigo-600 via-teal-500 to-indigo-600
-                         bg-[length:200%_200%] bg-clip-text text-transparent 
-                         animate-gradient-x drop-shadow-[0_4px_15px_rgba(0,0,0,0.4)]
-                         tracking-wide"
+              className="text-5xl font-extrabold mb-3 
+                bg-gradient-to-r from-indigo-500 via-teal-400 to-indigo-500
+                bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient-x
+                drop-shadow-[0_4px_15px_rgba(0,0,0,0.6)]"
             >
               DIPU BARMAN
             </motion.h2>
 
-            {/* Gradient animation keyframes */}
+            <motion.h3
+              variants={item}
+              className="text-xl font-medium text-gray-300"
+            >
+              {typedText}
+              <span className="animate-pulse">|</span>
+            </motion.h3>
+
+            <motion.p
+              variants={item}
+              className="text-lg mt-6 mb-8 leading-relaxed text-gray-400"
+            >
+                I specialize in building Mern-stack web applications using
+              MongoDB, Express.js, React, and Node.js. Focused on creating
+              efficient, scalable solutions with clean code architecture.
+            </motion.p>
+
+            {/* Social Links */}
+            <motion.div variants={container} className="flex flex-col gap-4">
+              <motion.div variants={item} className="flex gap-4">
+                {[
+                  { Icon: FaGithub, link: "https://github.com/dipu-barman" },
+                  {
+                    Icon: FaLinkedin,
+                    link: "https://www.linkedin.com/in/dipu-barman/",
+                  },
+                  {
+                    Icon: FaFacebook,
+                    link: "https://www.facebook.com/dipu.borman.3",
+                  },
+                ].map(({ Icon, link }, idx) => (
+                  <motion.a
+                    key={idx}
+                    whileHover={{ scale: 1.3, rotate: 5 }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={link}
+                    className="text-2xl text-gray-500 hover:text-blue-500"
+                  >
+                    <Icon />
+                  </motion.a>
+                ))}
+              </motion.div>
+
+              {/* Buttons */}
+              <motion.div variants={item} className="flex gap-3 flex-wrap">
+                <button
+                  onClick={handleDownload}
+                  className="flex items-center px-4 py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-lg"
+                >
+                  Download CV <FaFileDownload className="ml-2" />
+                </button>
+                <button
+                  onClick={previewCV}
+                  className="flex items-center px-4 py-2 rounded-lg border border-blue-500 text-gray-300 hover:bg-blue-900 hover:text-white"
+                >
+                  Preview CV <FaEye className="ml-2" />
+                </button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          {/* IMAGE + SKILL ORBIT */}
+          <motion.div variants={imageVariants} className="relative order-1 md:order-2">
+            <motion.div
+              style={{
+                transform: `rotateY(${rotate.x}deg) rotateX(${rotate.y}deg)`,
+              }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="relative rounded-full p-[6px] bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 animate-border-spin shadow-[0_0_50px_rgba(0,0,0,0.95)]"
+            >
+              <motion.img
+                src={Photo}
+                alt="Dipu Barman"
+                className="rounded-full w-[320px] sm:w-[320px] md:w-[380px] h-[330px] lg:h-[380px] object-cover object-top relative z-10"
+              />
+
+              {/* Orbiting skill icons */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-full h-full relative animate-skill-orbit">
+                  {skillIcons.map(({ Icon, name }, idx) => {
+                    // Each icon gets a delay to offset its animation start
+                    const delay = `${(idx * 2.5).toFixed(2)}s`;
+                    return (
+                      <motion.div
+                        key={idx}
+                        className="absolute top-1/2 left-1/2"
+                        style={{
+                          transformOrigin: "70px center",
+                          marginLeft: -28,
+                          marginTop: -28,
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          width: "56px",
+                          height: "56px",
+                          backgroundColor: "rgba(0,0,0,0.8)",
+                          borderRadius: "9999px",
+                          border: "1px solid rgba(255,255,255,0.3)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "white",
+                          boxShadow: "0 0 15px rgba(0,0,0,0.8)",
+                          cursor: "default",
+                          rotate: 0,
+                          animation: `orbit 10s linear infinite`,
+                          animationDelay: delay,
+                        }}
+                        animate={{ rotate: 360 }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 10,
+                          ease: "linear",
+                          repeatType: "loop",
+                          delay: parseFloat(delay),
+                        }}
+                        initial={{ rotate: 0 }}
+                        title={name}
+                      >
+                        <Icon className="text-3xl" />
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Animations */}
             <style>
               {`
+                @keyframes border-spin {
+                  0% { background-position: 0% 50%; }
+                  100% { background-position: 200% 50%; }
+                }
+                .animate-border-spin {
+                  background-size: 200% 200%;
+                  animation: border-spin 4s linear infinite;
+                }
+                @keyframes skill-orbit {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+                .animate-skill-orbit {
+                  animation: skill-orbit 10s linear infinite;
+                }
                 @keyframes gradient-x {
                   0%, 100% { background-position: 0% 50%; }
                   50% { background-position: 100% 50%; }
@@ -136,114 +283,6 @@ const Header = () => {
                 }
               `}
             </style>
-
-            {/* Typewriter Role */}
-            <motion.h3
-              variants={item}
-              className="text-lg sm:text-xl md:text-2xl font-medium"
-              style={{ color: "#CBD5E1" }} // cool light gray
-            >
-              {typedText}
-              <span className="animate-pulse">|</span>
-            </motion.h3>
-
-            {/* Description */}
-            <motion.p
-              variants={item}
-              className="text-base sm:text-lg mt-6 mb-8 leading-relaxed"
-              style={{ color: "#94A3B8" }} // muted medium gray
-            >
-              I specialize in building full-stack web applications using
-              MongoDB, Express.js, React, and Node.js. Focused on creating
-              efficient, scalable solutions with clean code architecture.
-            </motion.p>
-
-            {/* Social Icons */}
-            <motion.div
-              variants={container}
-              className="flex flex-col items-center md:items-start gap-4"
-            >
-              <motion.div variants={item} className="flex gap-4 sm:gap-5">
-                {[
-                  { Icon: FaGithub, link: "https://github.com/dipu-barman" },
-                  { Icon: FaLinkedin, link: "https://www.linkedin.com/in/dipu-barman/" },
-                  { Icon: FaFacebook, link: "https://www.facebook.com/dipu.borman.3?mibextid=ZbWKwL" },
-                ].map(({ Icon, link }, idx) => (
-                  <motion.a
-                    key={idx}
-                    whileHover={{ scale: 1.3, rotate: 5 }}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={link}
-                    className="text-2xl transition-colors duration-300"
-                    style={{ color: "#6B7280" }} // neutral gray
-                    onMouseEnter={e => e.currentTarget.style.color = "#2563EB"} // bright blue hover
-                    onMouseLeave={e => e.currentTarget.style.color = "#6B7280"}
-                    aria-label={`Link to ${link}`}
-                  >
-                    <Icon />
-                  </motion.a>
-                ))}
-              </motion.div>
-
-              {/* Buttons */}
-              <motion.div
-                variants={item}
-                className="flex gap-3 sm:gap-4 flex-wrap justify-center"
-              >
-                <button
-                  onClick={handleDownload}
-                  className="btn text-white shadow-lg transition-all"
-                  style={{
-                    backgroundColor: "#2563EB",
-                    boxShadow: "0 4px 15px rgba(37, 99, 235, 0.5)",
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.backgroundColor = "#1D4ED8";
-                    e.currentTarget.style.boxShadow = "0 4px 20px rgba(29, 78, 216, 0.7)";
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.backgroundColor = "#2563EB";
-                    e.currentTarget.style.boxShadow = "0 4px 15px rgba(37, 99, 235, 0.5)";
-                  }}
-                >
-                  Download CV <FaFileDownload className="ml-2" />
-                </button>
-                <button
-                  onClick={previewCV}
-                  className="btn btn-outline text-gray-300 hover:bg-blue-900 hover:text-white transition-all"
-                  style={{ borderColor: "#2563EB" }}
-                >
-                  Preview CV <FaEye className="ml-2" />
-                </button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          {/* Image */}
-          <motion.div
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            variants={imageVariants}
-            className="mb-8 md:mb-0 order-1 md:order-2 z-10"
-          >
-            <motion.div
-              style={{
-                transform: `rotateY(${rotate.x}deg) rotateX(${rotate.y}deg)`,
-              }}
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="rounded-2xl overflow-hidden shadow-2xl border border-gray-700 transition-all"
-            >
-              <motion.img
-                initial={{ scale: 1.05 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                src={Photo}
-                alt="Dipu Barman"
-                className="w-[320px] sm:w-[360px] md:w-[420px] h-[420px] object-cover object-top"
-              />
-            </motion.div>
           </motion.div>
         </div>
       </motion.header>
